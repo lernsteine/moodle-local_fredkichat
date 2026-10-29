@@ -68,6 +68,7 @@ $PAGE->requires->js_call_amd('local_fredkichat/chat', 'init', [[
         'newchat' => get_string('newchat', 'local_fredkichat'),
         'deletechat' => get_string('deletechat', 'local_fredkichat'),
         'error' => get_string('error', 'local_fredkichat'),
+        'table' => get_string('tablelabel', 'local_fredkichat'),
     ],
 ]]);
 

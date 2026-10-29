@@ -34,6 +34,9 @@ const safeUrl = (url) => {
     }
 };
 
+/** @var {string} Accessible label of rendered tables, set by init(). */
+let tableLabel = '';
+
 const renderMarkdown = (text) => {
     const inline = (value) => {
         let out = escapeHtml(value);
@@ -74,7 +77,8 @@ const renderMarkdown = (text) => {
             const cells = Array.from({length: width}, (_, index) => row[index] ?? '');
             return `<tr>${cells.map((cell) => `<td>${inline(cell)}</td>`).join('')}</tr>`;
         }).join('');
-        return `<div class="fredkichat-table-wrap" role="region" aria-label="Tabelle" tabindex="0"><table><thead><tr>${headerHtml}</tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+        return `<div class="fredkichat-table-wrap" role="region" aria-label="${escapeHtml(tableLabel)}" tabindex="0">` +
+            `<table><thead><tr>${headerHtml}</tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
     };
 
     const lines = String(text).replace(/\r\n?/g, '\n').split('\n');
@@ -221,7 +225,8 @@ export const init = (config) => {
     const newChat = root.querySelector('[data-action="new-chat"]');
     const toggles = root.querySelectorAll('[data-action="toggle-history"]');
     const thinkingLabel = root.querySelector('[data-region="thinking-label"]')?.textContent || '';
-    const str = Object.assign({newchat: '', deletechat: '', error: ''}, config.strings || {});
+    const str = Object.assign({newchat: '', deletechat: '', error: '', table: ''}, config.strings || {});
+    tableLabel = str.table;
     const starterQuestions = root.querySelectorAll('[data-action="starter-question"]');
 
     let activeReader = null;
@@ -331,7 +336,9 @@ export const init = (config) => {
     const showThinking = () => {
         const el = document.createElement('div');
         el.className = 'fredkichat-message fredkichat-message-bot fredkichat-loading';
-        el.innerHTML = `<span class="fredkichat-thinking"><span class="fredkichat-thinking-text">${escapeHtml(thinkingLabel)}</span><span class="fredkichat-thinking-dot"></span><span class="fredkichat-thinking-dot"></span><span class="fredkichat-thinking-dot"></span></span>`;
+        const dot = '<span class="fredkichat-thinking-dot"></span>';
+        el.innerHTML = '<span class="fredkichat-thinking">' +
+            `<span class="fredkichat-thinking-text">${escapeHtml(thinkingLabel)}</span>${dot}${dot}${dot}</span>`;
         messages.appendChild(el);
         scrollToLatest();
         return el;
@@ -602,7 +609,10 @@ export const init = (config) => {
                 }
             };
 
-            while (!done && !serverDone) {
+            while (!done) {
+                if (serverDone) {
+                    break;
+                }
                 const result = await reader.read();
                 done = result.done;
                 if (result.value) {

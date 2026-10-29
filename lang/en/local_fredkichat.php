@@ -137,6 +137,7 @@ $string['siteaccess_help'] = 'If enabled, every logged-in user can use this chat
 $string['starterquestions'] = 'Example questions';
 $string['statusline'] = 'Your AI assistant';
 $string['stopanswer'] = 'Stop response';
+$string['tablelabel'] = 'Table';
 $string['task_cleanuppublicsessions'] = 'Remove expired FredKI sessions of external embeds';
 $string['textcolor'] = 'Text colour';
 $string['thinking'] = 'FredKI is thinking …';
