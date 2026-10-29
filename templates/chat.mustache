@@ -81,18 +81,18 @@
         </aside>
         <div class="fredkichat-sidebar-backdrop" data-action="toggle-history"></div>
 
-        <section class="fredkichat-chatpane">
+        <div class="fredkichat-chatpane">
             <main class="fredkichat-main">
-                <section class="fredkichat-welcome">
+                <div class="fredkichat-welcome">
                     <div>{{{welcometext}}}</div>
                     {{#haswelcomesuggestions}}
-                    <div class="fredkichat-starters" aria-label="{{#str}}starterquestions, local_fredkichat{{/str}}">
+                    <div class="fredkichat-starters" role="group" aria-label="{{#str}}starterquestions, local_fredkichat{{/str}}">
                         {{#welcomesuggestions}}
                         <button type="button" class="fredkichat-starter" data-action="starter-question" data-question="{{text}}">{{text}}</button>
                         {{/welcomesuggestions}}
                     </div>
                     {{/haswelcomesuggestions}}
-                </section>
+                </div>
                 <div class="fredkichat-messages" data-region="messages" aria-live="polite"></div>
             </main>
 
@@ -116,7 +116,7 @@
                     {{#hasfeedback}}<a href="{{feedbackurl}}" target="_blank" rel="noopener noreferrer">{{#str}}feedback, local_fredkichat{{/str}}</a>{{/hasfeedback}}
                 </div>
             </footer>
-        </section>
+        </div>
     </div>
 
     <span class="fredkichat-thinking-label" data-region="thinking-label" hidden>{{#str}}thinking, local_fredkichat{{/str}}</span>

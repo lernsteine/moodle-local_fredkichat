@@ -1,150 +1,719 @@
-#page-local-fredkichat-embed #page,
-#page-local-fredkichat-embed #page-content,
-#page-local-fredkichat-embed .main-inner,
-#page-local-fredkichat-embed [role="main"] {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
+body#page-local-fredkichat-embed #page,
+body#page-local-fredkichat-embed #page-content,
+body#page-local-fredkichat-embed #page .main-inner,
+body#page-local-fredkichat-embed #page [role="main"] {
+    margin: 0;
+    padding: 0;
+    max-width: none;
 }
 
-.fredkichat-shell { min-height:100vh; height:100vh; display:flex; flex-direction:column; background:var(--fredki-bg); color:var(--fredki-text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; overflow:hidden; }
-.fredkichat-header { background:var(--fredki-header); color:#fff; padding:12px 18px; display:flex; align-items:center; gap:10px; flex:0 0 auto; }
-.fredkichat-history-toggle { width:36px; height:36px; flex:0 0 auto; border:0; border-radius:50%; background:rgba(255,255,255,.18); color:#fff; font-size:19px; cursor:pointer; }
-.fredkichat-brand { display:flex; align-items:center; gap:12px; min-width:0; }
+.fredkichat-shell {
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--fredki-bg);
+    color: var(--fredki-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    overflow: hidden;
+}
+
+.fredkichat-header {
+    background: var(--fredki-header);
+    color: #fff;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+
+.fredkichat-history-toggle {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .18);
+    color: #fff;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.fredkichat-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
 /* Preserve uploaded brand logos in their original aspect ratio instead of cropping them to a circle. */
 .fredkichat-logo {
-    width:auto;
-    height:58px;
-    max-width:108px;
-    border-radius:10px;
-    object-fit:contain;
-    object-position:center;
-    padding:4px 6px;
-    box-sizing:border-box;
-    background:#fff;
-    border:1px solid rgba(255,255,255,.9);
-    flex:0 0 auto;
+    width: auto;
+    height: 58px;
+    max-width: 108px;
+    border-radius: 10px;
+    object-fit: contain;
+    object-position: center;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid rgba(255, 255, 255, .9);
+    flex: 0 0 auto;
 }
+
 .fredkichat-logo-fallback {
-    width:48px;
-    height:48px;
-    padding:0;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#fff;
-    color:var(--fredki-header);
-    font-weight:700;
-    font-size:23px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: var(--fredki-header);
+    font-weight: 700;
+    font-size: 23px;
 }
-@media (max-width:600px) {
-    .fredkichat-logo { height:50px; max-width:92px; padding:3px 5px; }
-    .fredkichat-logo-fallback { width:44px; height:44px; }
-    .fredkichat-brand { gap:9px; }
-    .fredkichat-title { font-size:19px; }
+
+@media (max-width: 600px) {
+    .fredkichat-logo {
+        height: 50px;
+        max-width: 92px;
+        padding: 3px 5px;
+    }
+
+    .fredkichat-logo-fallback {
+        width: 44px;
+        height: 44px;
+    }
+
+    .fredkichat-brand {
+        gap: 9px;
+    }
+
+    .fredkichat-title {
+        font-size: 19px;
+    }
 }
-.fredkichat-title { font-size:21px; font-weight:700; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.fredkichat-status { margin-top:4px; font-size:13px; opacity:.94; }
-.fredkichat-status span { display:inline-block; width:8px; height:8px; background:#bff2a5; border-radius:50%; margin-right:6px; }
 
-.fredkichat-workspace { flex:1 1 auto; min-height:0; display:flex; position:relative; }
-.fredkichat-chatpane { flex:1 1 auto; min-width:0; min-height:0; display:flex; flex-direction:column; }
-.fredkichat-main { flex:1 1 auto; min-height:0; padding:14px; overflow-y:auto; }
-.fredkichat-welcome { background:var(--fredki-bot-message); border-radius:16px; padding:18px; box-shadow:0 3px 14px rgba(0,0,0,.045); margin-bottom:12px; }
-.fredkichat-welcome h2 { margin:0 0 7px; font-size:24px; color:var(--fredki-text); }
-.fredkichat-welcome p { margin:0; font-size:16px; line-height:1.5; }
-.fredkichat-welcome > div { margin:0; font-size:16px; line-height:1.5; }
-.fredkichat-starters { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
-.fredkichat-starter { width:100%; border:0; border-radius:12px; background:var(--fredki-hover); color:var(--fredki-text); padding:12px 14px; text-align:left; font-size:15px; line-height:1.35; cursor:pointer; transition:background .15s ease, transform .15s ease; }
-.fredkichat-starter:hover,.fredkichat-starter:focus-visible { background:color-mix(in srgb, var(--fredki-hover) 72%, var(--fredki-accent)); transform:translateY(-1px); outline:none; }
+.fredkichat-title {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-.fredkichat-note { background:rgba(155,137,117,.10); border:1px solid rgba(155,137,117,.22); border-radius:13px; padding:11px 13px; margin-bottom:14px; font-size:13px; }
-.fredkichat-note strong { display:block; margin-bottom:3px; }
-.fredkichat-messages { display:flex; flex-direction:column; gap:10px; padding-bottom:8px; }
-.fredkichat-message { max-width:86%; padding:11px 13px; border-radius:15px; font-size:14px; line-height:1.55; word-break:break-word; }
-.fredkichat-message-bot { max-width:96%; padding:18px 20px; font-size:15px; line-height:1.6; }
-.fredkichat-message-user { align-self:flex-end; background:var(--fredki-user-message); color:var(--fredki-text); border:1px solid var(--fredki-border); border-bottom-right-radius:5px; }
-.fredkichat-message-bot { align-self:flex-start; background:var(--fredki-bot-message); color:var(--fredki-text); border:1px solid var(--fredki-border); box-shadow:0 3px 12px rgba(0,0,0,.05); border-bottom-left-radius:5px; }
+.fredkichat-status {
+    margin-top: 4px;
+    font-size: 13px;
+    opacity: .94;
+}
+
+.fredkichat-status span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #bff2a5;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.fredkichat-workspace {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    position: relative;
+}
+
+.fredkichat-chatpane {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.fredkichat-main {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 14px;
+    overflow-y: auto;
+}
+
+.fredkichat-welcome {
+    background: var(--fredki-bot-message);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, .045);
+    margin-bottom: 12px;
+}
+
+.fredkichat-welcome h2 {
+    margin: 0 0 7px;
+    font-size: 24px;
+    color: var(--fredki-text);
+}
+
+.fredkichat-welcome p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.fredkichat-welcome > div {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.fredkichat-starters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.fredkichat-starter {
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    background: var(--fredki-hover);
+    color: var(--fredki-text);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+}
+
+.fredkichat-starter:hover,
+.fredkichat-starter:focus-visible {
+    background: color-mix(in srgb, var(--fredki-hover) 72%, var(--fredki-accent));
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.fredkichat-note {
+    background: rgba(155, 137, 117, .10);
+    border: 1px solid rgba(155, 137, 117, .22);
+    border-radius: 13px;
+    padding: 11px 13px;
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+.fredkichat-note strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.fredkichat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 8px;
+}
+
+.fredkichat-message {
+    max-width: 86%;
+    padding: 11px 13px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+.fredkichat-message-bot {
+    max-width: 96%;
+    padding: 18px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.fredkichat-message-user {
+    align-self: flex-end;
+    background: var(--fredki-user-message);
+    color: var(--fredki-text);
+    border: 1px solid var(--fredki-border);
+    border-bottom-right-radius: 5px;
+}
+
+.fredkichat-message-bot {
+    align-self: flex-start;
+    background: var(--fredki-bot-message);
+    color: var(--fredki-text);
+    border: 1px solid var(--fredki-border);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .05);
+    border-bottom-left-radius: 5px;
+}
+
 .fredkichat-message-bot h1,
 .fredkichat-message-bot h2,
-.fredkichat-message-bot h3 { color:var(--fredki-text); font-weight:700; line-height:1.25; letter-spacing:-.01em; }
-.fredkichat-message-bot h1 { font-size:1.35em; margin:0 0 .8em; }
-.fredkichat-message-bot h2 { font-size:1.24em; margin:1.35em 0 .55em; }
-.fredkichat-message-bot h3 { font-size:1.16em; margin:1.25em 0 .5em; }
+.fredkichat-message-bot h3 {
+    color: var(--fredki-text);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+}
+
+.fredkichat-message-bot h1 {
+    font-size: 1.35em;
+    margin: 0 0 .8em;
+}
+
+.fredkichat-message-bot h2 {
+    font-size: 1.24em;
+    margin: 1.35em 0 .55em;
+}
+
+.fredkichat-message-bot h3 {
+    font-size: 1.16em;
+    margin: 1.25em 0 .5em;
+}
+
 .fredkichat-message-bot h1:first-child,
 .fredkichat-message-bot h2:first-child,
-.fredkichat-message-bot h3:first-child { margin-top:0; }
-.fredkichat-message-bot p { margin:0 0 .95em; }
-.fredkichat-message-bot p:last-child { margin-bottom:0; }
-.fredkichat-message-bot ul,
-.fredkichat-message-bot ol { margin:.35em 0 1.05em 1.25em; padding:0; }
-.fredkichat-message-bot li { margin:.38em 0; padding-left:.15em; }
-.fredkichat-message-bot li::marker { color:var(--fredki-accent); }
-.fredkichat-message-bot strong { font-weight:700; }
-.fredkichat-message-bot > :last-child { margin-bottom:0; }
-.fredkichat-message-bot img { max-width:100%; height:auto; border-radius:10px; margin:.5rem 0; }
-.fredkichat-message-bot a { color:var(--fredki-accent); text-decoration:underline; }
-.fredkichat-table-wrap { width:100%; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin:.55em 0 1em; border:1px solid var(--fredki-border); border-radius:12px; background:var(--fredki-bot-message); }
-.fredkichat-table-wrap:focus-visible { outline:2px solid color-mix(in srgb, var(--fredki-accent) 48%, transparent); outline-offset:2px; }
-.fredkichat-message-bot table { width:100%; min-width:520px; border-collapse:collapse; border-spacing:0; margin:0; font-size:.96em; line-height:1.45; }
-.fredkichat-message-bot th,
-.fredkichat-message-bot td { padding:10px 12px; text-align:left; vertical-align:top; border-right:1px solid var(--fredki-border); border-bottom:1px solid var(--fredki-border); overflow-wrap:anywhere; }
-.fredkichat-message-bot th:last-child,
-.fredkichat-message-bot td:last-child { border-right:0; }
-.fredkichat-message-bot tbody tr:last-child td { border-bottom:0; }
-.fredkichat-message-bot th { font-weight:700; background:color-mix(in srgb, var(--fredki-hover) 72%, var(--fredki-bot-message)); }
-.fredkichat-message-bot tbody tr:nth-child(even) td { background:color-mix(in srgb, var(--fredki-hover) 34%, var(--fredki-bot-message)); }
-@media (max-width: 600px) {
-    .fredkichat-message-bot { max-width:100%; padding:15px 14px; }
-    .fredkichat-message-bot table { min-width:480px; font-size:.92em; }
-    .fredkichat-message-bot th,
-    .fredkichat-message-bot td { padding:9px 10px; }
+.fredkichat-message-bot h3:first-child {
+    margin-top: 0;
 }
-.fredkichat-loading { opacity:.78; font-style:italic; }
-.fredkichat-thinking { display:inline-flex; align-items:center; gap:4px; min-width:58px; }
-.fredkichat-thinking-dot { width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.35; animation:fredkichat-pulse 1.1s infinite ease-in-out; }
-.fredkichat-thinking-dot:nth-child(2){animation-delay:.15s}.fredkichat-thinking-dot:nth-child(3){animation-delay:.3s}
-@keyframes fredkichat-pulse { 0%,80%,100%{transform:scale(.75);opacity:.25} 40%{transform:scale(1);opacity:.8} }
 
-.fredkichat-composer { padding:11px 14px; background:var(--fredki-bot-message); border-top:1px solid var(--fredki-border); display:flex; gap:10px; align-items:center; flex:0 0 auto; }
-.fredkichat-composer textarea { flex:1; resize:none; border:1px solid var(--fredki-border); border-radius:17px; padding:12px 14px; font-size:16px; line-height:1.35; min-height:50px; }
-.fredkichat-composer textarea:focus { outline:2px solid color-mix(in srgb, var(--fredki-accent) 45%, transparent); border-color:var(--fredki-accent); }
-.fredkichat-composer button { width:50px; height:50px; border:0; border-radius:50%; background:var(--fredki-accent); color:#fff; font-size:22px; cursor:pointer; flex:0 0 auto; }
-.fredkichat-composer button:disabled { opacity:.5; cursor:wait; }
-.fredkichat-footer { background:var(--fredki-bot-message); text-align:center; padding:7px 14px 10px; color:var(--fredki-footer); border-top:1px solid var(--fredki-border); font-size:12px; flex:0 0 auto; }
-.fredkichat-warning { margin-bottom:4px; }.fredkichat-links { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }.fredkichat-links a { color:var(--fredki-footer); text-decoration:underline; }
+.fredkichat-message-bot p {
+    margin: 0 0 .95em;
+}
+
+.fredkichat-message-bot p:last-child {
+    margin-bottom: 0;
+}
+
+.fredkichat-message-bot ul,
+.fredkichat-message-bot ol {
+    margin: .35em 0 1.05em 1.25em;
+    padding: 0;
+}
+
+.fredkichat-message-bot li {
+    margin: .38em 0;
+    padding-left: .15em;
+}
+
+.fredkichat-message-bot li::marker {
+    color: var(--fredki-accent);
+}
+
+.fredkichat-message-bot strong {
+    font-weight: 700;
+}
+
+.fredkichat-message-bot > :last-child {
+    margin-bottom: 0;
+}
+
+.fredkichat-message-bot img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: .5rem 0;
+}
+
+.fredkichat-message-bot a {
+    color: var(--fredki-accent);
+    text-decoration: underline;
+}
+
+.fredkichat-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: .55em 0 1em;
+    border: 1px solid var(--fredki-border);
+    border-radius: 12px;
+    background: var(--fredki-bot-message);
+}
+
+.fredkichat-table-wrap:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--fredki-accent) 48%, transparent);
+    outline-offset: 2px;
+}
+
+.fredkichat-message-bot table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    font-size: .96em;
+    line-height: 1.45;
+}
+
+.fredkichat-message-bot th,
+.fredkichat-message-bot td {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+    border-right: 1px solid var(--fredki-border);
+    border-bottom: 1px solid var(--fredki-border);
+    overflow-wrap: anywhere;
+}
+
+.fredkichat-message-bot th:last-child,
+.fredkichat-message-bot td:last-child {
+    border-right: 0;
+}
+
+.fredkichat-message-bot tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.fredkichat-message-bot th {
+    font-weight: 700;
+    background: color-mix(in srgb, var(--fredki-hover) 72%, var(--fredki-bot-message));
+}
+
+.fredkichat-message-bot tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--fredki-hover) 34%, var(--fredki-bot-message));
+}
+
+@media (max-width: 600px) {
+    .fredkichat-message-bot {
+        max-width: 100%;
+        padding: 15px 14px;
+    }
+
+    .fredkichat-message-bot table {
+        min-width: 480px;
+        font-size: .92em;
+    }
+
+    .fredkichat-message-bot th,
+    .fredkichat-message-bot td {
+        padding: 9px 10px;
+    }
+}
+
+.fredkichat-loading {
+    opacity: .78;
+    font-style: italic;
+}
+
+.fredkichat-thinking {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 58px;
+}
+
+.fredkichat-thinking-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: .35;
+    animation: fredkichat-pulse 1.1s infinite ease-in-out;
+}
+
+.fredkichat-thinking-dot:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.fredkichat-thinking-dot:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes fredkichat-pulse {
+    0%,
+    80%,
+    100% {
+        transform: scale(.75);
+        opacity: .25;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: .8;
+    }
+}
+
+.fredkichat-composer {
+    padding: 11px 14px;
+    background: var(--fredki-bot-message);
+    border-top: 1px solid var(--fredki-border);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.fredkichat-composer textarea {
+    flex: 1;
+    resize: none;
+    border: 1px solid var(--fredki-border);
+    border-radius: 17px;
+    padding: 12px 14px;
+    font-size: 16px;
+    line-height: 1.35;
+    min-height: 50px;
+}
+
+.fredkichat-composer textarea:focus {
+    outline: 2px solid color-mix(in srgb, var(--fredki-accent) 45%, transparent);
+    border-color: var(--fredki-accent);
+}
+
+.fredkichat-composer button {
+    width: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--fredki-accent);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.fredkichat-composer button:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+.fredkichat-footer {
+    background: var(--fredki-bot-message);
+    text-align: center;
+    padding: 7px 14px 10px;
+    color: var(--fredki-footer);
+    border-top: 1px solid var(--fredki-border);
+    font-size: 12px;
+    flex: 0 0 auto;
+}
+
+.fredkichat-warning {
+    margin-bottom: 4px;
+}
+
+.fredkichat-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.fredkichat-links a {
+    color: var(--fredki-footer);
+    text-decoration: underline;
+}
 
 /* History drawer. It overlays the chat at widget size so the conversation stays readable. */
-.fredkichat-sidebar { position:absolute; inset:0 auto 0 0; width:min(78%, 285px); background:var(--fredki-hover); border-right:1px solid var(--fredki-border); z-index:12; transform:translateX(-102%); transition:transform .2s ease; padding:14px; overflow-y:auto; box-shadow:8px 0 28px rgba(0,0,0,.12); }
-.fredkichat-shell.history-open .fredkichat-sidebar { transform:translateX(0); }
-.fredkichat-sidebar-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.18); z-index:11; opacity:0; pointer-events:none; transition:opacity .2s ease; }
-.fredkichat-shell.history-open .fredkichat-sidebar-backdrop { opacity:1; pointer-events:auto; }
-.fredkichat-newchat { width:100%; border:1px solid var(--fredki-border); background:var(--fredki-bot-message); color:var(--fredki-text); border-radius:12px; padding:10px 12px; font-weight:600; text-align:left; cursor:pointer; margin-bottom:18px; }
-.fredkichat-sidebar-title { font-size:13px; font-weight:700; color:#666; margin:0 4px 8px; }
-.fredkichat-history { display:flex; flex-direction:column; gap:7px; }
-.fredkichat-history-row { display:flex; align-items:center; gap:4px; border-radius:10px; }
-.fredkichat-history-row:hover,.fredkichat-history-row.is-active { background:var(--fredki-bot-message); box-shadow:0 2px 8px rgba(0,0,0,.05); }
-.fredkichat-history-item { flex:1 1 auto; min-width:0; border:0; background:transparent; border-radius:10px; padding:10px 8px 10px 11px; color:var(--fredki-text); text-align:left; cursor:pointer; font-size:14px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.fredkichat-history-delete { flex:0 0 auto; width:34px; height:34px; border:0; border-radius:9px; background:transparent; color:#666; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; }
-.fredkichat-history-delete:hover,.fredkichat-history-delete:focus-visible { background:rgba(0,0,0,.06); color:#222; outline:none; }
-.fredkichat-thinking-label { display:none; }
+.fredkichat-sidebar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: min(78%, 285px);
+    background: var(--fredki-hover);
+    border-right: 1px solid var(--fredki-border);
+    z-index: 12;
+    transform: translateX(-102%);
+    transition: transform .2s ease;
+    padding: 14px;
+    overflow-y: auto;
+    box-shadow: 8px 0 28px rgba(0, 0, 0, .12);
+}
+
+.fredkichat-shell.history-open .fredkichat-sidebar {
+    transform: translateX(0);
+}
+
+.fredkichat-sidebar-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .18);
+    z-index: 11;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+}
+
+.fredkichat-shell.history-open .fredkichat-sidebar-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.fredkichat-newchat {
+    width: 100%;
+    border: 1px solid var(--fredki-border);
+    background: var(--fredki-bot-message);
+    color: var(--fredki-text);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 18px;
+}
+
+.fredkichat-sidebar-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    margin: 0 4px 8px;
+}
+
+.fredkichat-history {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.fredkichat-history-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 10px;
+}
+
+.fredkichat-history-row:hover,
+.fredkichat-history-row.is-active {
+    background: var(--fredki-bot-message);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+.fredkichat-history-item {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 10px;
+    padding: 10px 8px 10px 11px;
+    color: var(--fredki-text);
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fredkichat-history-delete {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.fredkichat-history-delete:hover,
+.fredkichat-history-delete:focus-visible {
+    background: rgba(0, 0, 0, .06);
+    color: #222;
+    outline: none;
+}
+
+.fredkichat-thinking-label {
+    display: none;
+}
 
 @media (min-width: 900px) {
-    .fredkichat-shell.wide-history .fredkichat-sidebar { position:relative; transform:none; width:260px; box-shadow:none; }
-    .fredkichat-shell.wide-history .fredkichat-sidebar-backdrop { display:none; }
+    .fredkichat-shell.wide-history .fredkichat-sidebar {
+        position: relative;
+        transform: none;
+        width: 260px;
+        box-shadow: none;
+    }
+
+    .fredkichat-shell.wide-history .fredkichat-sidebar-backdrop {
+        display: none;
+    }
 }
 
 /* Admin dashboard thumbnails. */
-.fredkichat-admin-logo { width:48px; height:48px; border-radius:50%; object-fit:cover; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; }
-.fredkichat-admin-logo-fallback { background:#eef3f8; color:#176faf; font-weight:700; font-size:20px; }
+.fredkichat-admin-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.fredkichat-admin-logo-fallback {
+    background: #eef3f8;
+    color: #176faf;
+    font-weight: 700;
+    font-size: 20px;
+}
 
 /* Streaming controls. */
-.fredkichat-streaming-plain { white-space: pre-wrap; }
-.fredkichat-stopbar { flex:0 0 auto; display:flex; justify-content:center; padding:7px 14px 5px; background:var(--fredki-bg); }
-.fredkichat-stopbar[hidden] { display:none !important; }
-.fredkichat-stop { display:inline-flex; align-items:center; gap:8px; border:1.5px solid var(--fredki-accent); border-radius:10px; background:var(--fredki-bot-message); color:var(--fredki-accent); padding:7px 12px; font-size:14px; line-height:1.2; font-weight:600; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.04); }
-.fredkichat-stop:hover,.fredkichat-stop:focus-visible { background:var(--fredki-hover); outline:none; }
-.fredkichat-stop:disabled { opacity:.5; cursor:default; }
-.fredkichat-stop-icon { width:20px; height:20px; border:2px solid currentColor; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; }
-.fredkichat-stop-icon span { width:7px; height:7px; border-radius:1px; background:currentColor; display:block; }
+.fredkichat-streaming-plain {
+    white-space: pre-wrap;
+}
+
+.fredkichat-stopbar {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 7px 14px 5px;
+    background: var(--fredki-bg);
+}
+
+.fredkichat-shell .fredkichat-stopbar[hidden] {
+    display: none;
+}
+
+.fredkichat-stop {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid var(--fredki-accent);
+    border-radius: 10px;
+    background: var(--fredki-bot-message);
+    color: var(--fredki-accent);
+    padding: 7px 12px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.fredkichat-stop:hover,
+.fredkichat-stop:focus-visible {
+    background: var(--fredki-hover);
+    outline: none;
+}
+
+.fredkichat-stop:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.fredkichat-stop-icon {
+    width: 20px;
+    height: 20px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.fredkichat-stop-icon span {
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+    background: currentColor;
+    display: block;
+}
