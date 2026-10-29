@@ -37,6 +37,8 @@ const safeUrl = (url) => {
 /** @var {string} Accessible label of rendered tables, set by init(). */
 let tableLabel = '';
 
+// A small, self-contained Markdown renderer; splitting it further would scatter its shared state.
+// eslint-disable-next-line complexity
 const renderMarkdown = (text) => {
     const inline = (value) => {
         let out = escapeHtml(value);
@@ -361,13 +363,15 @@ export const init = (config) => {
         }
         stopping = true;
         if (activeReader) {
-            activeReader.cancel().catch(() => {});
+            activeReader.cancel().catch(() => null);
         }
         if (stopTyping) {
             stopTyping();
         }
     };
 
+    // Sending, streaming and stopping share one request state, so they stay in one function.
+    // eslint-disable-next-line complexity
     const submit = async() => {
         const message = input.value.trim();
         const thread = activeThread();
@@ -522,7 +526,7 @@ export const init = (config) => {
                 abortController.abort();
             }
             if (activeReader) {
-                activeReader.cancel().catch(() => {});
+                activeReader.cancel().catch(() => null);
             }
 
             const kept = visibleAnswer || receivedAnswer;
@@ -629,7 +633,7 @@ export const init = (config) => {
                 handleBlock(buffer);
             }
 
-            // reader.cancel() may end a ReadableStream cleanly instead of throwing.
+            // A reader.cancel() call may end a ReadableStream cleanly instead of throwing.
             // Force the stopped path so a cancelled response is never replaced by
             // the complete upstream answer a moment later.
             if (stopping) {
@@ -657,7 +661,7 @@ export const init = (config) => {
             streamEnded = true;
             stopVisualPump();
             if (e?.name === 'AbortError' || stopping) {
-                // stopTyping() already freezes and persists the visible partial answer
+                // The stopTyping() handler already freezes and persists the visible partial answer
                 // immediately. Keep this fallback for aborts that happen before the
                 // stop handler could do so.
                 if (!stopPersisted) {
