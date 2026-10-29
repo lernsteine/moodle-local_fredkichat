@@ -1,5 +1,11 @@
 # Changes
 
+## 1.2.3 (2026-10-29)
+
+- Passes the Moodle plugin CI on Moodle 4.4, 4.5 and 5.0 (stylelint, ESLint, Mustache lint, grunt build).
+- Stylesheet reformatted without !important; chat template uses valid HTML structure.
+- Accessible label of tables in answers is now a language string.
+
 ## 1.2.2 (2026-10-29)
 
 - Fixed: with developer debugging enabled, a debugging notice could break the chat launcher script.
