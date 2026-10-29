@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/fredkichat/db" VERSION="20261028" COMMENT="XMLDB file for Moodle local/fredkichat"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_fredkichat_bots" COMMENT="Styled FredKI chatbots, one design per FredKI agent">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="FredKI agent id"/>
+        <FIELD NAME="owneruserid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="User who created the design"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="FredKI Chat" SEQUENCE="false"/>
+        <FIELD NAME="agentwelcome" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Public greeting copied from the FredKI agent"/>
+        <FIELD NAME="token" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Public FredKI access token of the agent"/>
+        <FIELD NAME="siteaccess" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Usable by every logged-in user, not only through course blocks"/>
+        <FIELD NAME="headercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#A59480" SEQUENCE="false"/>
+        <FIELD NAME="accentcolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#9B8975" SEQUENCE="false"/>
+        <FIELD NAME="backgroundcolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#FCFBF9" SEQUENCE="false"/>
+        <FIELD NAME="textcolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#20222A" SEQUENCE="false"/>
+        <FIELD NAME="botmessagecolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#FFFFFF" SEQUENCE="false"/>
+        <FIELD NAME="usermessagecolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#DCEFFA" SEQUENCE="false"/>
+        <FIELD NAME="bordercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#D6E6F2" SEQUENCE="false"/>
+        <FIELD NAME="hovercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#E8F3FA" SEQUENCE="false"/>
+        <FIELD NAME="footercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="#6E7F8D" SEQUENCE="false"/>
+        <FIELD NAME="footertext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="imprinturl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="privacyurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="feedbackurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="externalenabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Allow public embedding outside Moodle"/>
+        <FIELD NAME="publickey" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="Random public embed identifier"/>
+        <FIELD NAME="alloweddomains" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Newline-separated domains allowed to embed the bot"/>
+        <FIELD NAME="blockeddomains" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Newline-separated domains blocked from embedding the bot"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="publickey_uix" UNIQUE="true" FIELDS="publickey"/>
+        <INDEX NAME="agentid_ix" UNIQUE="false" FIELDS="agentid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_fredkichat_public" COMMENT="Temporary FredKI session state for public embeds, no chat messages">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sessionkey" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="botid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="threadid" TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="bearer" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="chatid" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="botid_fk" TYPE="foreign" FIELDS="botid" REFTABLE="local_fredkichat_bots" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sessionkey_uix" UNIQUE="true" FIELDS="sessionkey"/>
+        <INDEX NAME="timemodified_ix" UNIQUE="false" FIELDS="timemodified"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

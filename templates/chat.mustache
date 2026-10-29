@@ -1,0 +1,123 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_fredkichat/chat
+
+    Styled FredKI chat window.
+
+    Context variables required for this template:
+    * botid - Chatbot id
+    * name - Display name
+    * haslogo, logo - Logo URL
+    * headercolor, accentcolor, backgroundcolor, textcolor, botmessagecolor, usermessagecolor,
+      bordercolor, hovercolor, footercolor - Validated #RRGGBB colours
+    * welcometext - Formatted greeting (HTML)
+    * haswelcomesuggestions, welcomesuggestions - Starter questions
+    * footertext - Notice text
+    * hasimprint, imprinturl, hasprivacy, privacyurl, hasfeedback, feedbackurl - Footer links
+
+    Example context (json):
+    {
+        "botid": 1,
+        "name": "FredKI",
+        "haslogo": false,
+        "logo": "",
+        "headercolor": "#A59480",
+        "accentcolor": "#9B8975",
+        "backgroundcolor": "#FCFBF9",
+        "textcolor": "#20222A",
+        "botmessagecolor": "#FFFFFF",
+        "usermessagecolor": "#DCEFFA",
+        "bordercolor": "#D6E6F2",
+        "hovercolor": "#E8F3FA",
+        "footercolor": "#6E7F8D",
+        "welcometext": "Hello! How can I help?",
+        "haswelcomesuggestions": true,
+        "welcomesuggestions": [{"text": "What is this course about?"}],
+        "footertext": "AI-generated answers may contain errors.",
+        "hasimprint": true,
+        "imprinturl": "https://example.com/imprint",
+        "hasprivacy": false,
+        "privacyurl": "",
+        "hasfeedback": false,
+        "feedbackurl": ""
+    }
+}}
+<div class="fredkichat-shell"
+     data-region="fredkichat"
+     data-botid="{{botid}}"
+     style="--fredki-header: {{headercolor}}; --fredki-accent: {{accentcolor}}; --fredki-bg: {{backgroundcolor}}; --fredki-text: {{textcolor}}; --fredki-bot-message: {{botmessagecolor}}; --fredki-user-message: {{usermessagecolor}}; --fredki-border: {{bordercolor}}; --fredki-hover: {{hovercolor}}; --fredki-footer: {{footercolor}};">
+    <header class="fredkichat-header">
+        <button class="fredkichat-history-toggle" type="button" data-action="toggle-history" aria-label="{{#str}}togglehistory, local_fredkichat{{/str}}">☰</button>
+        <div class="fredkichat-brand">
+            {{#haslogo}}<img class="fredkichat-logo" src="{{logo}}" alt="">{{/haslogo}}
+            {{^haslogo}}<div class="fredkichat-logo fredkichat-logo-fallback">F</div>{{/haslogo}}
+            <div>
+                <div class="fredkichat-title">{{name}}</div>
+                <div class="fredkichat-status"><span></span> {{#str}}statusline, local_fredkichat{{/str}}</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="fredkichat-workspace">
+        <aside class="fredkichat-sidebar" data-region="sidebar" aria-label="{{#str}}chathistory, local_fredkichat{{/str}}">
+            <button type="button" class="fredkichat-newchat" data-action="new-chat">+ {{#str}}newchat, local_fredkichat{{/str}}</button>
+            <div class="fredkichat-sidebar-title">{{#str}}chathistory, local_fredkichat{{/str}}</div>
+            <div class="fredkichat-history" data-region="history"></div>
+        </aside>
+        <div class="fredkichat-sidebar-backdrop" data-action="toggle-history"></div>
+
+        <section class="fredkichat-chatpane">
+            <main class="fredkichat-main">
+                <section class="fredkichat-welcome">
+                    <div>{{{welcometext}}}</div>
+                    {{#haswelcomesuggestions}}
+                    <div class="fredkichat-starters" aria-label="{{#str}}starterquestions, local_fredkichat{{/str}}">
+                        {{#welcomesuggestions}}
+                        <button type="button" class="fredkichat-starter" data-action="starter-question" data-question="{{text}}">{{text}}</button>
+                        {{/welcomesuggestions}}
+                    </div>
+                    {{/haswelcomesuggestions}}
+                </section>
+                <div class="fredkichat-messages" data-region="messages" aria-live="polite"></div>
+            </main>
+
+            <div class="fredkichat-stopbar" data-region="stopbar" hidden>
+                <button type="button" class="fredkichat-stop" data-action="stop" disabled>
+                    <span class="fredkichat-stop-icon" aria-hidden="true"><span></span></span>
+                    {{#str}}stopanswer, local_fredkichat{{/str}}
+                </button>
+            </div>
+
+            <div class="fredkichat-composer">
+                <textarea data-region="input" rows="2" aria-label="{{#str}}chatplaceholder, local_fredkichat{{/str}}" placeholder="{{#str}}chatplaceholder, local_fredkichat{{/str}}"></textarea>
+                <button type="button" data-action="send" aria-label="{{#str}}send, local_fredkichat{{/str}}">➤</button>
+            </div>
+
+            <footer class="fredkichat-footer">
+                <div class="fredkichat-warning">{{footertext}}</div>
+                <div class="fredkichat-links">
+                    {{#hasimprint}}<a href="{{imprinturl}}" target="_blank" rel="noopener noreferrer">{{#str}}imprint, local_fredkichat{{/str}}</a>{{/hasimprint}}
+                    {{#hasprivacy}}<a href="{{privacyurl}}" target="_blank" rel="noopener noreferrer">{{#str}}privacy, local_fredkichat{{/str}}</a>{{/hasprivacy}}
+                    {{#hasfeedback}}<a href="{{feedbackurl}}" target="_blank" rel="noopener noreferrer">{{#str}}feedback, local_fredkichat{{/str}}</a>{{/hasfeedback}}
+                </div>
+            </footer>
+        </section>
+    </div>
+
+    <span class="fredkichat-thinking-label" data-region="thinking-label" hidden>{{#str}}thinking, local_fredkichat{{/str}}</span>
+</div>
