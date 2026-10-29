@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.4 (2026-10-29)
+
+- Fixed: missing space between the greeting and the starter questions.
+
 ## 1.2.3 (2026-10-29)
 
 - Passes the Moodle plugin CI on Moodle 4.4, 4.5 and 5.0 (stylelint, ESLint, Mustache lint, grunt build).
