@@ -1,5 +1,10 @@
 # Changes
 
+## 1.2.5 (2026-11-13)
+
+- LICENSE file with the full GNU GPL v3 text in the plugin root.
+- README: FredKI can be self-hosted for free (https://github.com/lernsteine/FredKI); the hosted service is optional.
+
 ## 1.2.4 (2026-10-29)
 
 - Fixed: missing space between the greeting and the starter questions.

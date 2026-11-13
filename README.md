@@ -1,9 +1,13 @@
 # FredKI Chat (local_fredkichat)
 
-Give agents of the hosted AI service **FredKI** a Moodle look and use them as a native, streaming chat inside Moodle.
+Give agents of the open-source AI platform **FredKI** a Moodle look and use them as a native, streaming chat inside Moodle.
 
-FredKI is a hosted service by lernsteine.com based on [MaxKB](https://github.com/1Panel-dev/MaxKB) v2.
-**A FredKI account (service account) is required.** The plugin itself is free software under the GNU GPL v3 or later.
+The plugin itself is free software under the GNU GPL v3 or later.
+
+FredKI is free and open-source software (GNU GPL v3). You can run your own FredKI server
+without payment and without functional limits: https://github.com/lernsteine/FredKI.
+lernsteine.com additionally offers FredKI as an optional hosted service; it is not required.
+The plugin works the same with both.
 
 ## Features
 
@@ -31,7 +35,7 @@ A chatbot design can be used
 
 - Moodle 4.4 or later
 - PHP cURL extension
-- A FredKI service account
+- A FredKI server (self-hosted or hosted, see above) with a service account
 
 ## Installation
 
