@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.6 (2026-11-17)
+
+- Chatbot design form: "Save and return" saves and goes back to the list of designs; "Save and continue editing" stays on the form.
+
 ## 1.2.5 (2026-11-13)
 
 - LICENSE file with the full GNU GPL v3 text in the plugin root.

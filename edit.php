@@ -174,7 +174,11 @@ if ($data = $mform->get_data()) {
         bot_form::logo_options()
     );
 
-    redirect(new moodle_url('/local/fredkichat/edit.php', ['id' => $botid]), get_string('changessaved'));
+    // The main button returns to the list; "Save and continue editing" stays on the form.
+    $target = !empty($data->submitbutton2)
+        ? new moodle_url('/local/fredkichat/edit.php', ['id' => $botid])
+        : new moodle_url('/local/fredkichat/index.php');
+    redirect($target, get_string('changessaved'), null, \core\output\notification::NOTIFY_SUCCESS);
 }
 
 echo $OUTPUT->header();

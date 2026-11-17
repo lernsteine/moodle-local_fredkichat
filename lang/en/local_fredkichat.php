@@ -131,6 +131,7 @@ $string['publicratelimit'] = 'Messages per hour per external visitor';
 $string['publicratelimit_desc'] = 'Maximum number of messages per hour and chatbot from one network address in external embeds. 0 means unlimited.';
 $string['ratelimitexceeded'] = 'The message limit has been reached. Please try again later.';
 $string['regeneratepublickey'] = 'Regenerate public embed key';
+$string['saveandcontinue'] = 'Save and continue editing';
 $string['send'] = 'Send';
 $string['siteaccess'] = 'Available to all logged-in users';
 $string['siteaccess_help'] = 'If enabled, every logged-in user can use this chatbot anywhere in Moodle, e.g. via the embed code. If disabled, the chatbot can only be used in courses whose “FredKI Flex Agent” block has selected it.';

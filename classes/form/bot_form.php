@@ -103,7 +103,14 @@ class bot_form extends \moodleform {
         $mform->setType('blockeddomains', PARAM_RAW_TRIMMED);
         $mform->addHelpButton('blockeddomains', 'blockeddomains', 'local_fredkichat');
 
-        $this->add_action_buttons(true);
+        // Save and return to the list is the main action; staying on the form is the second option.
+        $buttons = [
+            $mform->createElement('submit', 'submitbutton', get_string('savechangesandreturn')),
+            $mform->createElement('submit', 'submitbutton2', get_string('saveandcontinue', 'local_fredkichat')),
+            $mform->createElement('cancel'),
+        ];
+        $mform->addGroup($buttons, 'buttonar', '', [' '], false);
+        $mform->closeHeaderBefore('buttonar');
     }
 
     /**
