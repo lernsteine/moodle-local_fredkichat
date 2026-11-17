@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.7 (2026-11-17)
+
+- New option per chatbot design: "White frame around the logo" (on by default, as before). Untick it for logos with their own background.
+
 ## 1.2.6 (2026-11-17)
 
 - Chatbot design form: "Save and return" saves and goes back to the list of designs; "Save and continue editing" stays on the form.

@@ -64,7 +64,7 @@
     <header class="fredkichat-header">
         <button class="fredkichat-history-toggle" type="button" data-action="toggle-history" aria-label="{{#str}}togglehistory, local_fredkichat{{/str}}">☰</button>
         <div class="fredkichat-brand">
-            {{#haslogo}}<img class="fredkichat-logo" src="{{logo}}" alt="">{{/haslogo}}
+            {{#haslogo}}<img class="fredkichat-logo{{#logoplain}} fredkichat-logo-plain{{/logoplain}}" src="{{logo}}" alt="">{{/haslogo}}
             {{^haslogo}}<div class="fredkichat-logo fredkichat-logo-fallback">F</div>{{/haslogo}}
             <div>
                 <div class="fredkichat-title">{{name}}</div>
