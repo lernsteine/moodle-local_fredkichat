@@ -89,6 +89,7 @@ $defaults = $bot ? clone($bot) : (object)array_merge(bot_helper::COLOURS, [
 ]);
 $defaults->logo_filemanager = $draftid;
 
+$PAGE->requires->js_call_amd('local_fredkichat/size_lock', 'init');
 $mform = new bot_form(null, ['agents' => $agents]);
 $mform->set_data($defaults);
 

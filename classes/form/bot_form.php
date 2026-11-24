@@ -89,6 +89,9 @@ class bot_form extends \moodleform {
             $mform->setDefault($field, 68);
             $mform->addHelpButton($field, $field, 'local_fredkichat');
         }
+        // Only an editing aid (see amd/src/size_lock.js); it is not stored.
+        $mform->addElement('advcheckbox', 'launcherproportional', get_string('launcherproportional', 'local_fredkichat'));
+        $mform->setDefault('launcherproportional', 1);
         $mform->setDefault('logoframe', 1);
         $mform->addHelpButton('logoframe', 'logoframe', 'local_fredkichat');
 

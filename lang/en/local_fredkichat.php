@@ -104,6 +104,7 @@ $string['launcherheight_help'] = 'Height of the floating chat button in pixels, 
 $string['launchermaximize'] = 'Enlarge chat';
 $string['launcherminimize'] = 'Reduce chat';
 $string['launcheropen'] = 'Open {$a}';
+$string['launcherproportional'] = 'Keep proportions of the chat button';
 $string['launchershape'] = 'Chat button shape';
 $string['launchershape_help'] = 'Shape of the floating chat button at the bottom right of the page. It shows the logo; without a logo it shows the accent colour.';
 $string['launchershape_rounded'] = 'Square with rounded corners';

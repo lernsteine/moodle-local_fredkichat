@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.11 (2026-11-24)
+
+- "Keep proportions of the chat button": changing the width adjusts the height and the other way round.
+
 ## 1.2.10 (2026-11-24)
 
 - New options per chatbot design: width and height of the floating chat button (40–320 × 40–160 px, default 68 × 68). A wide round button becomes a pill.
