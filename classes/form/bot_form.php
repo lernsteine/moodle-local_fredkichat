@@ -70,6 +70,12 @@ class bot_form extends \moodleform {
             null,
             self::logo_options()
         );
+        $mform->addElement('select', 'logoshape', get_string('logoshape', 'local_fredkichat'), [
+            'rounded' => get_string('logoshape_rounded', 'local_fredkichat'),
+            'round' => get_string('logoshape_round', 'local_fredkichat'),
+        ]);
+        $mform->setDefault('logoshape', 'rounded');
+        $mform->addHelpButton('logoshape', 'logoshape', 'local_fredkichat');
         $mform->addElement('advcheckbox', 'logoframe', get_string('logoframe', 'local_fredkichat'));
         $mform->setDefault('logoframe', 1);
         $mform->addHelpButton('logoframe', 'logoframe', 'local_fredkichat');

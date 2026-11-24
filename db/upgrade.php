@@ -256,5 +256,15 @@ function xmldb_local_fredkichat_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026111701, 'local', 'fredkichat');
     }
 
+    if ($oldversion < 2026112400) {
+        // Option per design: logo as a rectangle with rounded corners (default, as before) or as a circle.
+        $table = new xmldb_table('local_fredkichat_bots');
+        $field = new xmldb_field('logoshape', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, 'rounded', 'alloweddomains');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2026112400, 'local', 'fredkichat');
+    }
+
     return true;
 }

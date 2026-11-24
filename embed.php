@@ -92,6 +92,7 @@ $data = [
     'logo' => $logo ? $logo->out(false) : '',
     'haslogo' => (bool)$logo,
     'logoplain' => isset($bot->logoframe) && (int)$bot->logoframe === 0,
+    'logoround' => ($bot->logoshape ?? '') === 'round',
     'footertext' => format_string($bot->footertext ?: get_string('footertext_default', 'local_fredkichat')),
     'imprinturl' => $bot->imprinturl,
     'privacyurl' => $bot->privacyurl,

@@ -68,6 +68,19 @@ body#page-local-fredkichat-embed #page [role="main"] {
     border: 0;
 }
 
+/* Round logo: a square cut to a circle; with frame the whole logo stays visible inside a white circle. */
+.fredkichat-logo.fredkichat-logo-round {
+    width: 58px;
+    max-width: 58px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.fredkichat-logo.fredkichat-logo-round.fredkichat-logo-plain {
+    padding: 0;
+    object-fit: cover;
+}
+
 .fredkichat-logo-fallback {
     width: 48px;
     height: 48px;
@@ -92,6 +105,11 @@ body#page-local-fredkichat-embed #page [role="main"] {
     .fredkichat-logo-fallback {
         width: 44px;
         height: 44px;
+    }
+
+    .fredkichat-logo.fredkichat-logo-round {
+        width: 50px;
+        max-width: 50px;
     }
 
     .fredkichat-brand {

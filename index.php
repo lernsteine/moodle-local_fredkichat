@@ -77,6 +77,10 @@ if ($bots) {
                 ['target' => '_blank']
             ),
             html_writer::link(
+                new moodle_url('/local/fredkichat/copy.php', ['id' => $bot->id, 'sesskey' => sesskey()]),
+                get_string('copy', 'local_fredkichat')
+            ),
+            html_writer::link(
                 new moodle_url('/local/fredkichat/delete.php', ['id' => $bot->id]),
                 get_string('delete', 'local_fredkichat')
             ),

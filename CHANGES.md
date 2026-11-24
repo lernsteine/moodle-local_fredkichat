@@ -1,5 +1,10 @@
 # Changes
 
+## 1.2.8 (2026-11-24)
+
+- New option per chatbot design: "Logo shape" – rectangle with rounded corners (default, as before) or round.
+- Chatbot designs can be copied, including the logo. The copy opens for editing; external embedding is switched off for it.
+
 ## 1.2.7 (2026-11-17)
 
 - New option per chatbot design: "White frame around the logo" (on by default, as before). Untick it for logos with their own background.
