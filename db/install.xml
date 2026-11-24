@@ -30,6 +30,7 @@
         <FIELD NAME="publickey" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="Random public embed identifier"/>
         <FIELD NAME="alloweddomains" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Newline-separated domains allowed to embed the bot"/>
         <FIELD NAME="logoshape" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="rounded" SEQUENCE="false" COMMENT="Logo shape: rounded (rectangle with rounded corners) or round"/>
+        <FIELD NAME="launchershape" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="round" SEQUENCE="false" COMMENT="Floating chat button: round or rounded (square with rounded corners)"/>
         <FIELD NAME="logoframe" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Show the logo on a white frame"/>
         <FIELD NAME="blockeddomains" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Newline-separated domains blocked from embedding the bot"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

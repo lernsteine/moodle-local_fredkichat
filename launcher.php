@@ -78,6 +78,7 @@ $config = [
     'embedUrl' => $embedurl->out(false),
     'logoUrl' => $logo ? $logo->out(false) : '',
     'name' => $name,
+    'radius' => ($bot->launchershape ?? '') === 'rounded' ? '18px' : '50%',
     'accent' => preg_match('/^#[0-9A-Fa-f]{6}$/', (string)$bot->accentcolor) ? $bot->accentcolor : '#9B8975',
     'strings' => [
         'open' => get_string('launcheropen', 'local_fredkichat', $name),
@@ -109,7 +110,7 @@ $script = <<<'JS'
             width: 68px;
             height: 68px;
             border: 0;
-            border-radius: 50%;
+            border-radius: ${cfg.radius};
             padding: 0;
             background: ${cfg.accent};
             box-shadow: 0 8px 28px rgba(0,0,0,.22);

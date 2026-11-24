@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.9 (2026-11-24)
+
+- New option per chatbot design: "Chat button shape" – round (default, as before) or square with rounded corners.
+
 ## 1.2.8 (2026-11-24)
 
 - New option per chatbot design: "Logo shape" – rectangle with rounded corners (default, as before) or round.

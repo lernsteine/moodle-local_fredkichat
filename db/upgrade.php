@@ -266,5 +266,15 @@ function xmldb_local_fredkichat_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026112400, 'local', 'fredkichat');
     }
 
+    if ($oldversion < 2026112401) {
+        // Option per design: floating chat button round (default, as before) or square with rounded corners.
+        $table = new xmldb_table('local_fredkichat_bots');
+        $field = new xmldb_field('launchershape', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, 'round', 'alloweddomains');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2026112401, 'local', 'fredkichat');
+    }
+
     return true;
 }
