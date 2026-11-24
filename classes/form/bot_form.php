@@ -83,6 +83,12 @@ class bot_form extends \moodleform {
         ]);
         $mform->setDefault('launchershape', 'round');
         $mform->addHelpButton('launchershape', 'launchershape', 'local_fredkichat');
+        foreach (['launcherwidth', 'launcherheight'] as $field) {
+            $mform->addElement('text', $field, get_string($field, 'local_fredkichat'), ['size' => 5]);
+            $mform->setType($field, PARAM_INT);
+            $mform->setDefault($field, 68);
+            $mform->addHelpButton($field, $field, 'local_fredkichat');
+        }
         $mform->setDefault('logoframe', 1);
         $mform->addHelpButton('logoframe', 'logoframe', 'local_fredkichat');
 
@@ -155,6 +161,13 @@ class bot_form extends \moodleform {
         foreach (array_keys(bot_helper::COLOURS) as $field) {
             if (!empty($data[$field]) && !preg_match('/^#[0-9A-Fa-f]{6}$/', trim($data[$field]))) {
                 $errors[$field] = get_string('invalidcolor', 'local_fredkichat');
+            }
+        }
+        $limits = ['launcherwidth' => [40, 320], 'launcherheight' => [40, 160]];
+        foreach ($limits as $field => [$min, $max]) {
+            $value = (int)($data[$field] ?? 68);
+            if ($value < $min || $value > $max) {
+                $errors[$field] = get_string('launchersizeinvalid', 'local_fredkichat', (object)['min' => $min, 'max' => $max]);
             }
         }
         if (!empty($data['agentid'])) {

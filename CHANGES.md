@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.10 (2026-11-24)
+
+- New options per chatbot design: width and height of the floating chat button (40–320 × 40–160 px, default 68 × 68). A wide round button becomes a pill.
+
 ## 1.2.9 (2026-11-24)
 
 - New option per chatbot design: "Chat button shape" – round (default, as before) or square with rounded corners.

@@ -82,6 +82,8 @@ $defaults = $bot ? clone($bot) : (object)array_merge(bot_helper::COLOURS, [
     'logoframe' => 1,
     'logoshape' => 'rounded',
     'launchershape' => 'round',
+    'launcherwidth' => 68,
+    'launcherheight' => 68,
     'footertext' => get_string('footertext_default', 'local_fredkichat'),
     'externalenabled' => 0,
 ]);
@@ -140,6 +142,8 @@ if ($data = $mform->get_data()) {
         'logoframe' => empty($data->logoframe) ? 0 : 1,
         'logoshape' => ($data->logoshape ?? '') === 'round' ? 'round' : 'rounded',
         'launchershape' => ($data->launchershape ?? '') === 'rounded' ? 'rounded' : 'round',
+        'launcherwidth' => min(320, max(40, (int)($data->launcherwidth ?? 68))),
+        'launcherheight' => min(160, max(40, (int)($data->launcherheight ?? 68))),
         'footertext' => trim($data->footertext ?? ''),
         'imprinturl' => trim($data->imprinturl ?? ''),
         'privacyurl' => trim($data->privacyurl ?? ''),

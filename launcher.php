@@ -78,7 +78,10 @@ $config = [
     'embedUrl' => $embedurl->out(false),
     'logoUrl' => $logo ? $logo->out(false) : '',
     'name' => $name,
-    'radius' => ($bot->launchershape ?? '') === 'rounded' ? '18px' : '50%',
+    // Round = circle for a square button, pill shape for a wide one.
+    'radius' => ($bot->launchershape ?? '') === 'rounded' ? '18px' : '999px',
+    'width' => min(320, max(40, (int)($bot->launcherwidth ?? 68))),
+    'height' => min(160, max(40, (int)($bot->launcherheight ?? 68))),
     'accent' => preg_match('/^#[0-9A-Fa-f]{6}$/', (string)$bot->accentcolor) ? $bot->accentcolor : '#9B8975',
     'strings' => [
         'open' => get_string('launcheropen', 'local_fredkichat', $name),
@@ -107,8 +110,8 @@ $script = <<<'JS'
             position: fixed;
             right: 24px;
             bottom: 24px;
-            width: 68px;
-            height: 68px;
+            width: ${cfg.width}px;
+            height: ${cfg.height}px;
             border: 0;
             border-radius: ${cfg.radius};
             padding: 0;
@@ -129,7 +132,7 @@ $script = <<<'JS'
         #${cfg.id} .fredkichat-launcher-button img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: ${cfg.width === cfg.height ? 'cover' : 'contain'};
             display: block;
         }
         #${cfg.id} .fredkichat-launcher-fallback {
@@ -139,10 +142,10 @@ $script = <<<'JS'
         #${cfg.id} .fredkichat-launcher-panel {
             position: fixed;
             right: 24px;
-            bottom: 104px;
+            bottom: ${cfg.height + 36}px;
             width: 460px;
-            height: min(680px, calc(100vh - 132px));
-            max-height: calc(100vh - 132px);
+            height: min(680px, calc(100vh - ${cfg.height + 64}px));
+            max-height: calc(100vh - ${cfg.height + 64}px);
             border-radius: 18px;
             background: #fff;
             box-shadow: 0 16px 48px rgba(0,0,0,.24);
@@ -212,8 +215,8 @@ $script = <<<'JS'
             #${cfg.id} .fredkichat-launcher-button {
                 right: max(16px, env(safe-area-inset-right));
                 bottom: max(16px, env(safe-area-inset-bottom));
-                width: 62px;
-                height: 62px;
+                width: ${Math.round(cfg.width * 0.91)}px;
+                height: ${Math.round(cfg.height * 0.91)}px;
             }
 
             /*

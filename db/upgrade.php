@@ -276,5 +276,17 @@ function xmldb_local_fredkichat_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026112401, 'local', 'fredkichat');
     }
 
+    if ($oldversion < 2026112402) {
+        // Width and height of the floating chat button (68 x 68 px as before).
+        $table = new xmldb_table('local_fredkichat_bots');
+        foreach (['launcherwidth', 'launcherheight'] as $name) {
+            $field = new xmldb_field($name, XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '68', 'alloweddomains');
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+        upgrade_plugin_savepoint(true, 2026112402, 'local', 'fredkichat');
+    }
+
     return true;
 }
