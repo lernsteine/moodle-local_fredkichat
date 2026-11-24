@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.12 (2026-11-24)
+
+- Settings and the list of chatbot designs show where to get a FredKI® server: hosted by lernsteine.com or self-hosted from GitHub.
+
 ## 1.2.11 (2026-11-24)
 
 - "Keep proportions of the chat button": changing the width adjusts the height and the other way round.

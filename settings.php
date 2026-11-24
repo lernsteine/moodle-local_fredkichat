@@ -27,6 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $page = new admin_settingpage('local_fredkichat_settings', get_string('pluginname', 'local_fredkichat'));
 
+    if ($ADMIN->fulltree) {
+        $page->add(new admin_setting_heading(
+            'local_fredkichat/getfredki',
+            '',
+            \local_fredkichat\bot_helper::get_fredki_offer_html()
+        ));
+    }
+
     $page->add(new admin_setting_heading(
         'local_fredkichat/connection',
         get_string('connection', 'local_fredkichat'),

@@ -38,9 +38,32 @@ class bot_helper {
     ];
 
     /**
-     * URL of the stored logo of a chatbot.
+     * Box with links to the hosted FredKI service by lernsteine.com and to self-hosting FredKI.
      *
-     * @param int $botid Chatbot id.
+     * @return string HTML.
+     */
+    public static function get_fredki_offer_html(): string {
+        $links = \html_writer::link(
+            'https://fredki.com/fredki_moodle_hosting/',
+            get_string('getfredkihosted', 'local_fredkichat'),
+            ['class' => 'btn btn-primary me-2 mb-2', 'target' => '_blank', 'rel' => 'noopener']
+        ) . \html_writer::link(
+            'https://github.com/lernsteine/FredKI',
+            get_string('getfredkiselfhost', 'local_fredkichat'),
+            ['class' => 'btn btn-outline-secondary mb-2', 'target' => '_blank', 'rel' => 'noopener']
+        );
+        return \html_writer::div(
+            \html_writer::tag('h4', get_string('getfredki', 'local_fredkichat'), ['class' => 'h5']) .
+            \html_writer::tag('p', get_string('getfredki_desc', 'local_fredkichat')) .
+            \html_writer::div($links),
+            'fredkichat-offer card card-body mt-4'
+        );
+    }
+
+    /**
+     * Logo URL of a chatbot design.
+     *
+     * @param int $botid Bot id.
      * @return \moodle_url|null
      */
     public static function get_logo_url(int $botid): ?\moodle_url {

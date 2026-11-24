@@ -103,4 +103,5 @@ if ($bots) {
     echo html_writer::table($table);
 }
 
+echo bot_helper::get_fredki_offer_html();
 echo $OUTPUT->footer();
